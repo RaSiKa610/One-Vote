@@ -1,4 +1,7 @@
-import { createContext, useContext, useState, useCallback } from 'react';
+import { createContext, useContext, useState, useCallback, useEffect } from 'react';
+import { auth, db, googleProvider } from '../config/firebase';
+import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 const UserContext = createContext(null);
 
@@ -12,6 +15,8 @@ const DEFAULT_CHECKLIST = [
 ];
 
 export function UserProvider({ children }) {
+  const [user, setUser] = useState(null);
+  const [authLoading, setAuthLoading] = useState(true);
   const [voterType, setVoterType] = useState(() => localStorage.getItem('one_vote_type') || null);
   const [userName, setUserName] = useState(() => localStorage.getItem('one_vote_name') || 'Voter');
   const [checklist, setChecklist] = useState(() => {
@@ -24,15 +29,68 @@ export function UserProvider({ children }) {
     catch { return {}; }
   });
 
+  // Sync to Cloud helper
+  const syncToCloud = async (data) => {
+    if (!auth.currentUser) return;
+    try {
+      await setDoc(doc(db, 'users', auth.currentUser.uid), data, { merge: true });
+    } catch (error) {
+      console.error('Error syncing to cloud:', error);
+    }
+  };
+
+  // Auth Listener
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+      setUser(currentUser);
+      if (currentUser) {
+        setUserName(currentUser.displayName || 'Voter');
+        // Fetch cloud data
+        try {
+          const docSnap = await getDoc(doc(db, 'users', currentUser.uid));
+          if (docSnap.exists()) {
+            const data = docSnap.data();
+            if (data.voterType) { setVoterType(data.voterType); localStorage.setItem('one_vote_type', data.voterType); }
+            if (data.checklist) { setChecklist(data.checklist); localStorage.setItem('one_vote_checklist', JSON.stringify(data.checklist)); }
+            if (data.quizScores) { setQuizScores(data.quizScores); localStorage.setItem('one_vote_scores', JSON.stringify(data.quizScores)); }
+          }
+        } catch (error) {
+          console.error('Error fetching cloud data:', error);
+        }
+      }
+      setAuthLoading(false);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  const loginWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+    } catch (error) {
+      console.error('Error signing in:', error);
+    }
+  };
+
+  const logout = async () => {
+    try {
+      await signOut(auth);
+      setUserName('Voter');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
   const selectVoterType = useCallback((type) => {
     setVoterType(type);
     localStorage.setItem('one_vote_type', type);
+    syncToCloud({ voterType: type });
   }, []);
 
   const toggleChecklist = useCallback((id) => {
     setChecklist(prev => {
       const updated = prev.map(item => item.id === id ? { ...item, done: !item.done } : item);
       localStorage.setItem('one_vote_checklist', JSON.stringify(updated));
+      syncToCloud({ checklist: updated });
       return updated;
     });
   }, []);
@@ -41,6 +99,7 @@ export function UserProvider({ children }) {
     setQuizScores(prev => {
       const updated = { ...prev, [quizId]: score };
       localStorage.setItem('one_vote_scores', JSON.stringify(updated));
+      syncToCloud({ quizScores: updated });
       return updated;
     });
   }, []);
@@ -49,6 +108,7 @@ export function UserProvider({ children }) {
 
   return (
     <UserContext.Provider value={{
+      user, authLoading, loginWithGoogle, logout,
       voterType, selectVoterType,
       userName, setUserName,
       checklist, toggleChecklist,

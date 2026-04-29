@@ -5,7 +5,7 @@ import { Globe, ExternalLink, Info, Leaf, CheckSquare, User, BarChart2 } from 'l
 
 export default function Profile() {
   const { t, langCode, setLanguage } = useLanguage();
-  const { voterType, selectVoterType, checklistProgress, quizScores, userName } = useUser();
+  const { user, loginWithGoogle, logout, voterType, selectVoterType, checklistProgress, quizScores, userName } = useUser();
 
   const quizPct = quizScores['civic'] || 0;
 
@@ -14,12 +14,16 @@ export default function Profile() {
       {/* Header */}
       <div style={{ background: 'linear-gradient(135deg, #1A304D, #243d5e)', padding: '28px 20px 32px', color: 'white' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-          <div style={{ width: 64, height: 64, borderRadius: 20, background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid rgba(255,255,255,0.15)', flexShrink: 0 }}>
-            <User size={28} color="white" strokeWidth={1.5} />
+          <div style={{ width: 64, height: 64, borderRadius: 20, background: 'rgba(255,255,255,0.1)', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '2px solid rgba(255,255,255,0.15)', flexShrink: 0, overflow: 'hidden' }}>
+            {user && user.photoURL ? (
+              <img src={user.photoURL} alt="Profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            ) : (
+              <User size={28} color="white" strokeWidth={1.5} />
+            )}
           </div>
-          <div>
-            <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.6rem', letterSpacing: '0.02em' }}>{userName}</h1>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 6, opacity: 0.8, fontSize: '0.82rem' }}>
+          <div style={{ flex: 1 }}>
+            <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.6rem', letterSpacing: '0.02em', lineHeight: 1.2 }}>{userName}</h1>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4, opacity: 0.8, fontSize: '0.82rem' }}>
               {voterType === 'new'
                 ? <Leaf size={14} color="rgba(255,255,255,0.9)" />
                 : <CheckSquare size={14} color="rgba(255,255,255,0.9)" />
@@ -27,6 +31,23 @@ export default function Profile() {
               <span>{voterType === 'new' ? 'New Voter' : 'Existing Voter'}</span>
             </div>
           </div>
+        </div>
+
+        {/* Cloud Sync Auth */}
+        <div style={{ marginTop: 20 }}>
+          {!user ? (
+            <button
+              onClick={loginWithGoogle}
+              style={{ width: '100%', padding: '12px', borderRadius: 12, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', transition: 'var(--transition)' }}
+            >
+              <Globe size={16} /> Sign in to Backup Progress
+            </button>
+          ) : (
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: 'rgba(255,255,255,0.1)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.2)' }}>
+              <div style={{ fontSize: '0.8rem', opacity: 0.8 }}>Syncing as <strong style={{ opacity: 1 }}>{user.email}</strong></div>
+              <button onClick={logout} style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--red-light)', cursor: 'pointer' }}>Sign Out</button>
+            </div>
+          )}
         </div>
 
         {/* Stats */}
