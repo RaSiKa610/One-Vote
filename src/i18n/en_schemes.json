@@ -1,0 +1,25 @@
+{
+  "sch_title": "Active Government Schemes",
+  "sch_subtitle": "Explore current initiatives by the Government of India and apply directly.",
+  "sch_btn_apply": "Apply Now",
+  
+  "sch_name_kisan": "PM-KISAN",
+  "sch_elig_kisan": "Who should apply: Landholding farmer families.",
+  "sch_info_kisan": "Provides income support of ₹6,000 per year in three equal installments to all landholding farmer families.",
+  
+  "sch_name_ayushman": "Ayushman Bharat (PM-JAY)",
+  "sch_elig_ayushman": "Who should apply: Economically weaker sections (EWS) and vulnerable families.",
+  "sch_info_ayushman": "Provides a health cover of ₹5 lakh per family per year for secondary and tertiary care hospitalization.",
+  
+  "sch_name_pmay": "Pradhan Mantri Awas Yojana (PMAY)",
+  "sch_elig_pmay": "Who should apply: Homeless citizens, people living in kutcha houses, LIG, EWS.",
+  "sch_info_pmay": "Provides financial assistance to build permanent (pucca) houses with basic amenities like water and electricity.",
+  
+  "sch_name_ssy": "Sukanya Samriddhi Yojana",
+  "sch_elig_ssy": "Who should apply: Parents or legal guardians of a girl child below 10 years of age.",
+  "sch_info_ssy": "A high-interest small deposit scheme to secure the future education and marriage expenses of a girl child.",
+  
+  "sch_name_standup": "Stand-Up India",
+  "sch_elig_standup": "Who should apply: Women entrepreneurs, SC/ST category entrepreneurs.",
+  "sch_info_standup": "Facilitates bank loans between ₹10 lakh and ₹1 Crore to set up a new enterprise in manufacturing, services, or trading."
+}

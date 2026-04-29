@@ -14,6 +14,8 @@ import VoterChecklist from './pages/VoterChecklist';
 import Find from './pages/Find';
 import Quiz from './pages/Quiz';
 import Profile from './pages/Profile';
+import PoliticalHistory from './pages/PoliticalHistory';
+import GovSchemes from './pages/GovSchemes';
 
 const PAGE_TITLES = {
   '/home': null,
@@ -24,6 +26,8 @@ const PAGE_TITLES = {
   '/learn/quiz': 'Quiz',
   '/find': 'Find Booth',
   '/profile': 'Profile',
+  '/history': 'Political History',
+  '/schemes': 'Govt Schemes',
 };
 
 function AppShell({ children }) {
@@ -69,6 +73,8 @@ export default function App() {
               <Route path="/learn/checklist" element={<RequireOnboarding><VoterChecklist /></RequireOnboarding>} />
               <Route path="/learn/quiz" element={<RequireOnboarding><Quiz /></RequireOnboarding>} />
               <Route path="/find" element={<RequireOnboarding><Find /></RequireOnboarding>} />
+              <Route path="/history" element={<RequireOnboarding><PoliticalHistory /></RequireOnboarding>} />
+              <Route path="/schemes" element={<RequireOnboarding><GovSchemes /></RequireOnboarding>} />
               <Route path="/profile" element={<RequireOnboarding><Profile /></RequireOnboarding>} />
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
