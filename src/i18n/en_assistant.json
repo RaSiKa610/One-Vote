@@ -1,0 +1,19 @@
+{
+  "ast_greeting": "Namaste! I am your One Vote Assistant. How can I help you today? You can say 'Register to vote', 'Find my booth', or 'Election process'.",
+  "ast_btn_register": "Register to Vote",
+  "ast_btn_booth": "Find Polling Booth",
+  "ast_btn_process": "Election Process",
+  "ast_register_info": "To register to vote, you need to fill Form 6 on the Election Commission website. It is completely free. Should I open the registration page for you?",
+  "ast_booth_info": "To find your polling booth, you will need your Voter ID number. Shall I take you to the Find Booth page?",
+  "ast_process_info": "The election process has 11 steps. You can read all about it in our Learn section. Shall I take you there?",
+  "ast_btn_yes": "Yes, please",
+  "ast_btn_no": "No, thanks",
+  "ast_confirm_yes": "Okay, taking you there now.",
+  "ast_confirm_no": "No problem. Is there anything else I can help you with?",
+  "ast_goodbye": "Thank you for using One Vote. Have a great day! Jai Hind!",
+  "ast_not_understood": "I'm sorry, I didn't quite catch that. You can tap one of the buttons below to choose an option.",
+  "ast_btn_end": "End Call",
+  "ast_listening": "Listening...",
+  "ast_speak_now": "Speak now",
+  "ast_assistant_name": "One Vote Assistant"
+}
