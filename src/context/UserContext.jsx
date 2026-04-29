@@ -6,12 +6,12 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 const UserContext = createContext(null);
 
 const DEFAULT_CHECKLIST = [
-  { id: 'register', label: 'Register as a voter', done: false },
-  { id: 'voter_id', label: 'Get your Voter ID (EPIC Card)', done: false },
-  { id: 'check_roll', label: 'Check your name on voter roll', done: false },
-  { id: 'find_booth', label: 'Find your polling booth', done: false },
-  { id: 'know_candidate', label: 'Know your candidates', done: false },
-  { id: 'election_day', label: 'Carry valid ID on election day', done: false },
+  { id: 'register', labelKey: 'chk_register', done: false },
+  { id: 'voter_id', labelKey: 'chk_voter_id', done: false },
+  { id: 'check_roll', labelKey: 'chk_check_roll', done: false },
+  { id: 'find_booth', labelKey: 'chk_find_booth', done: false },
+  { id: 'know_candidate', labelKey: 'chk_know_candidate', done: false },
+  { id: 'election_day', labelKey: 'chk_election_day', done: false },
 ];
 
 export function UserProvider({ children }) {

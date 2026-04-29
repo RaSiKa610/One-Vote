@@ -59,8 +59,8 @@ export default function Find() {
       {/* Header */}
       <div style={{ background: 'linear-gradient(135deg, #C0392B, #922b21)', padding: '28px 20px 20px', color: 'white' }}>
         <span style={{ fontSize: '0.68rem', fontWeight: 800, letterSpacing: '0.12em', background: 'rgba(255,255,255,0.2)', padding: '4px 12px', borderRadius: 20 }}>POLLING STATION FINDER</span>
-        <h1 className="heading-lg" style={{ color: 'white', marginTop: 10 }}>Find Your Booth</h1>
-        <p style={{ color: 'rgba(255,255,255,0.8)', marginTop: 6, fontSize: '0.85rem' }}>Locate your nearest polling station</p>
+        <h1 className="heading-lg" style={{ color: 'white', marginTop: 10 }}>{t('find_booth_header')}</h1>
+        <p style={{ color: 'rgba(255,255,255,0.8)', marginTop: 6, fontSize: '0.85rem' }}>{t('find_booth_subtitle')}</p>
       </div>
 
       {/* Search */}
@@ -70,7 +70,7 @@ export default function Find() {
             <Search size={18} style={{ position: 'absolute', left: 14, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
             <input
               type="text"
-              placeholder="Enter pincode or area name..."
+              placeholder={t('enter_pincode')}
               value={search}
               onChange={e => setSearch(e.target.value)}
               style={{ width: '100%', padding: '12px 12px 12px 44px', borderRadius: 12, border: '2px solid var(--border)', fontSize: '0.9rem', fontFamily: 'var(--font-body)', outline: 'none', transition: 'var(--transition)' }}
@@ -96,8 +96,8 @@ export default function Find() {
               <div style={{ width: 48, height: 48, borderRadius: 14, background: 'var(--cream-dark)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 <MapPin size={24} color="var(--text-muted)" />
               </div>
-              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 500 }}>Allow location access to see nearby booths</p>
-              <button onClick={getLocation} className="btn btn-outline btn-sm">Enable Location</button>
+              <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 500 }}>{t('allow_location')}</p>
+              <button onClick={getLocation} className="btn btn-outline btn-sm">{t('enable_location')}</button>
             </div>
           )}
         </div>
@@ -105,14 +105,14 @@ export default function Find() {
         <div style={{ margin: '16px 20px', background: 'rgba(212,160,23,0.08)', border: '1px solid rgba(212,160,23,0.3)', borderRadius: 12, padding: '12px 16px', display: 'flex', gap: 10, alignItems: 'flex-start' }}>
           <Navigation size={16} color="#a07800" style={{ flexShrink: 0, marginTop: 2 }} />
           <p style={{ fontSize: '0.82rem', color: '#a07800', fontWeight: 600 }}>
-            You are offline — Showing cached booth data. Connect to internet for live map.
+            {t('offline_map')}
           </p>
         </div>
       )}
 
       {/* Booth list */}
       <div style={{ padding: '16px 20px 24px' }}>
-        <p className="label" style={{ color: 'var(--text-muted)', marginBottom: 12 }}>NEARBY BOOTHS</p>
+        <p className="label" style={{ color: 'var(--text-muted)', marginBottom: 12 }}>{t('nearby_booths')}</p>
         {SAMPLE_BOOTHS.map(booth => (
           <div key={booth.id} style={{ background: 'white', borderRadius: 16, border: '2px solid var(--border)', padding: '16px', marginBottom: 10, display: 'flex', alignItems: 'flex-start', gap: 14 }}>
             <div style={{ width: 44, height: 44, borderRadius: 12, background: 'rgba(192,57,43,0.08)', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
@@ -135,7 +135,7 @@ export default function Find() {
           rel="noopener noreferrer"
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '14px', background: 'var(--navy)', color: 'white', borderRadius: 16, fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1rem', letterSpacing: '0.02em', marginTop: 8 }}
         >
-          Find Official Booth on ECI <ExternalLink size={16} />
+          {t('find_official_booth')} <ExternalLink size={16} />
         </a>
       </div>
     </div>

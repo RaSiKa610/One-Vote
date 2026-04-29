@@ -1,20 +1,11 @@
-import fs from 'fs';
+import translate from 'google-translate-api-x';
 
-const API_KEY = process.env.VITE_GOOGLE_MAPS_API_KEY;
-
-async function testTranslation() {
-  const url = `https://translation.googleapis.com/language/translate/v2?key=${API_KEY}`;
+async function test() {
   try {
-    const res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ q: 'Hello', target: 'hi' })
-    });
-    const data = await res.json();
-    console.log(JSON.stringify(data, null, 2));
-  } catch (error) {
-    console.error(error);
+    const res = await translate('Hello world, this is a test.', { to: 'hi' });
+    console.log(res.text);
+  } catch (err) {
+    console.error(err);
   }
 }
-
-testTranslation();
+test();

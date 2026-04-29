@@ -28,7 +28,7 @@ export default function Profile() {
                 ? <Leaf size={14} color="rgba(255,255,255,0.9)" />
                 : <CheckSquare size={14} color="rgba(255,255,255,0.9)" />
               }
-              <span>{voterType === 'new' ? 'New Voter' : 'Existing Voter'}</span>
+              <span>{voterType === 'new' ? t('new_voter') : t('existing_voter')}</span>
             </div>
           </div>
         </div>
@@ -40,12 +40,12 @@ export default function Profile() {
               onClick={loginWithGoogle}
               style={{ width: '100%', padding: '12px', borderRadius: 12, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', transition: 'var(--transition)' }}
             >
-              <Globe size={16} /> Sign in to Backup Progress
+              <Globe size={16} /> {t('sign_in_backup')}
             </button>
           ) : (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: 'rgba(255,255,255,0.1)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.2)' }}>
-              <div style={{ fontSize: '0.8rem', opacity: 0.8 }}>Syncing as <strong style={{ opacity: 1 }}>{user.email}</strong></div>
-              <button onClick={logout} style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--red-light)', cursor: 'pointer' }}>Sign Out</button>
+              <div style={{ fontSize: '0.8rem', opacity: 0.8 }}>{t('syncing_as')} <strong style={{ opacity: 1 }}>{user.email}</strong></div>
+              <button onClick={logout} style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--red-light)', cursor: 'pointer' }}>{t('sign_out')}</button>
             </div>
           )}
         </div>
@@ -55,14 +55,14 @@ export default function Profile() {
           <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: 14, padding: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
               <CheckSquare size={16} color="rgba(255,255,255,0.7)" />
-              <span style={{ fontSize: '0.72rem', fontWeight: 700, opacity: 0.7, letterSpacing: '0.06em' }}>CHECKLIST</span>
+              <span style={{ fontSize: '0.72rem', fontWeight: 700, opacity: 0.7, letterSpacing: '0.06em' }}>{t('checklist_title').toUpperCase()}</span>
             </div>
             <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 700 }}>{checklistProgress}%</div>
           </div>
           <div style={{ background: 'rgba(255,255,255,0.08)', borderRadius: 14, padding: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
               <BarChart2 size={16} color="rgba(255,255,255,0.7)" />
-              <span style={{ fontSize: '0.72rem', fontWeight: 700, opacity: 0.7, letterSpacing: '0.06em' }}>QUIZ SCORE</span>
+              <span style={{ fontSize: '0.72rem', fontWeight: 700, opacity: 0.7, letterSpacing: '0.06em' }}>{t('score').toUpperCase()}</span>
             </div>
             <div style={{ fontFamily: 'var(--font-heading)', fontSize: '2rem', fontWeight: 700 }}>{quizPct}%</div>
           </div>
@@ -99,19 +99,19 @@ export default function Profile() {
 
         {/* Voter type switch */}
         <div style={{ background: 'white', borderRadius: 20, border: '2px solid var(--border)', padding: '16px 18px', marginBottom: 16 }}>
-          <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--navy)', marginBottom: 12, fontSize: '1.1rem', letterSpacing: '0.02em' }}>Switch Voter Type</p>
+          <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--navy)', marginBottom: 12, fontSize: '1.1rem', letterSpacing: '0.02em' }}>{t('profile_switch')}</p>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
             {[
-              { type: 'new',      Icon: Leaf,         label: 'New Voter' },
-              { type: 'existing', Icon: CheckSquare,  label: 'Existing Voter' },
-            ].map(({ type, Icon, label }) => (
+              { type: 'new',      Icon: Leaf,         labelKey: 'new_voter' },
+              { type: 'existing', Icon: CheckSquare,  labelKey: 'existing_voter' },
+            ].map(({ type, Icon, labelKey }) => (
               <button
                 key={type}
                 onClick={() => selectVoterType(type)}
                 style={{ padding: '14px 12px', borderRadius: 12, border: `2px solid ${voterType === type ? 'var(--navy)' : 'var(--border)'}`, background: voterType === type ? 'var(--navy)' : 'white', color: voterType === type ? 'white' : 'var(--navy)', fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', transition: 'var(--transition)', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, letterSpacing: '0.02em' }}
               >
                 <Icon size={16} strokeWidth={2} />
-                {label}
+                {t(labelKey)}
               </button>
             ))}
           </div>
@@ -121,30 +121,30 @@ export default function Profile() {
         <div style={{ background: 'var(--cream)', borderRadius: 20, border: '1px solid var(--border)', padding: '18px', marginBottom: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
             <Info size={18} color="var(--navy)" />
-            <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--navy)', fontSize: '1.1rem', letterSpacing: '0.02em' }}>About One Vote</p>
+            <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--navy)', fontSize: '1.1rem', letterSpacing: '0.02em' }}>{t('profile_about')}</p>
           </div>
           <p style={{ fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
-            One Vote is a non-partisan Election Process Education app dedicated to empowering every Indian voter with the knowledge to participate confidently in democracy. All content is based on official ECI guidelines.
+            {t('profile_about_desc')}
           </p>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 10 }}>Version 1.0.0 — Phase 1</p>
+          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 10 }}>{t('version')} 1.0.0 — Phase 3</p>
         </div>
 
         {/* ECI links */}
         <div style={{ background: 'white', borderRadius: 20, border: '2px solid var(--border)', overflow: 'hidden' }}>
           <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--border)' }}>
-            <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--navy)', fontSize: '1rem', letterSpacing: '0.02em' }}>Official ECI Resources</p>
+            <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, color: 'var(--navy)', fontSize: '1rem', letterSpacing: '0.02em' }}>{t('profile_eci')}</p>
           </div>
           {[
-            { label: 'voters.eci.gov.in — Registration & Roll', url: 'https://voters.eci.gov.in' },
-            { label: 'eci.gov.in — Official ECI Website',       url: 'https://eci.gov.in' },
-            { label: 'cVIGIL — Report Violations',              url: 'https://cvigil.eci.gov.in' },
+            { labelKey: 'profile_eci_reg', url: 'https://voters.eci.gov.in' },
+            { labelKey: 'profile_eci_web', url: 'https://eci.gov.in' },
+            { labelKey: 'profile_eci_cvigil', url: 'https://cvigil.eci.gov.in' },
           ].map((link, i) => (
             <a key={i} href={link.url} target="_blank" rel="noopener noreferrer"
               style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 18px', borderBottom: i < 2 ? '1px solid var(--border)' : 'none', color: 'var(--navy)', fontSize: '0.85rem', transition: 'var(--transition)' }}
               onMouseEnter={e => e.currentTarget.style.background = 'var(--cream)'}
               onMouseLeave={e => e.currentTarget.style.background = 'transparent'}
             >
-              <span>{link.label}</span>
+              <span>{t(link.labelKey)}</span>
               <ExternalLink size={14} color="var(--text-muted)" />
             </a>
           ))}

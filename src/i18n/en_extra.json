@@ -1,0 +1,18 @@
+{
+  "allow_location": "Allow location access to see nearby booths",
+  "enable_location": "Enable Location",
+  "offline_map": "You are offline — Showing cached booth data. Connect to internet for live map.",
+  "nearby_booths": "NEARBY BOOTHS",
+  "find_official_booth": "Find Official Booth on ECI",
+  
+  "quiz_q1": "What is the minimum age to vote in India?",
+  "quiz_q1_o1": "16 years", "quiz_q1_o2": "18 years", "quiz_q1_o3": "21 years", "quiz_q1_o4": "25 years",
+  "quiz_q2": "Which document is primarily used as voter ID?",
+  "quiz_q2_o1": "Passport", "quiz_q2_o2": "Aadhaar", "quiz_q2_o3": "EPIC Card", "quiz_q2_o4": "PAN Card",
+  "quiz_q3": "Who conducts elections in India?",
+  "quiz_q3_o1": "Supreme Court", "quiz_q3_o2": "Parliament", "quiz_q3_o3": "Election Commission", "quiz_q3_o4": "President",
+  "quiz_q4": "What does EVM stand for?",
+  "quiz_q4_o1": "Electronic Voting Machine", "quiz_q4_o2": "Electoral Voting Mechanism", "quiz_q4_o3": "Election Verifier Machine", "quiz_q4_o4": "Electronic Voter Maker",
+  "quiz_q5": "When is National Voters' Day celebrated?",
+  "quiz_q5_o1": "August 15", "quiz_q5_o2": "January 26", "quiz_q5_o3": "January 25", "quiz_q5_o4": "October 2"
+}

@@ -1,0 +1,21 @@
+{
+  "nv_step1_content": "You are eligible to vote if:\n• You are an Indian citizen\n• You are 18 years of age or older (as on January 1 of the qualifying year)\n• You are ordinarily resident of the constituency where you want to register\n• Your name is in the Electoral Roll of that constituency\n\nYou are NOT eligible if:\n• You are a foreign national\n• You have been declared of unsound mind by a court\n• You have been disqualified under any law",
+  "nv_step1_hl": "Age 18+ as on 1st January of the qualifying year",
+  
+  "nv_step2_content": "Register at voters.eci.gov.in — it's FREE!\n\nOnline registration (Form 6):\n1. Visit voters.eci.gov.in\n2. Click 'Register as New Voter'\n3. Fill Form 6 with your details\n4. Upload: Proof of Age + Proof of Address\n5. Submit and note your Application ID\n\nDocuments needed:\n• Age proof: Aadhaar, Birth certificate, Class 10 certificate\n• Address proof: Aadhaar, Ration card, Utility bill\n\nYour Voter ID (EPIC card) will be delivered to your address after verification.",
+  "nv_step2_hl": "Registration is FREE — Never pay anyone for voter registration",
+  "nv_step2_cta": "Register on ECI Portal",
+
+  "nv_step3_content": "The Elector's Photo Identity Card (EPIC) is your official voter ID.\n\nWhat it contains:\n• Your photo\n• EPIC number (unique identifier)\n• Your name, father's / husband's name\n• Your registered address\n• Your part number and serial number\n\nLost your EPIC?\nDownload e-EPIC (digital copy) from voters.eci.gov.in for free!\n\nVoting without EPIC?\nYou can also vote using: Aadhaar Card, Passport, Driving Licence, PAN Card, MNREGS Job Card, or any government-issued photo ID.",
+  "nv_step3_hl": "You can vote with 12 types of valid photo ID — not just Voter ID!",
+  
+  "nv_step4_content": "Every voter is assigned a specific polling booth. You MUST vote at your assigned booth.\n\nHow to find your booth:\n1. Visit voters.eci.gov.in\n2. Search for 'Find your Polling Station'\n3. Enter your EPIC number or name\n4. Your booth address will be shown\n\nThe Voter Slip:\nBefore election day, your local BLO (Booth Level Officer) will deliver a Voter Information Slip to your home with:\n• Your booth address\n• Voting date and time\n• Your serial number on the electoral roll\n\nUse our 'Find Booth' section to locate it on the map!",
+  "nv_step4_hl": "Polling booths cannot be changed — you must vote at your designated booth",
+  "nv_step4_cta": "Find My Booth",
+
+  "nv_step5_content": "EVM = Electronic Voting Machine — India uses these since 2004.\n\nHow to vote:\n1. Show your ID to the Presiding Officer\n2. Your finger will be marked with indelible ink\n3. You receive a ballot slip\n4. Go to the EVM — candidates are listed with their party symbols\n5. Press the BLUE BUTTON next to your chosen candidate\n6. A BEEP confirms your vote\n\nVVPAT:\nAfter pressing, a paper slip with your chosen party's name and symbol appears in the VVPAT window for 7 seconds — this is your vote confirmation.\n\nNOTA:\n'None Of The Above' is the last option on every EVM. Press it if you want to reject all candidates.",
+  "nv_step5_hl": "Once you press the button, your vote is final and cannot be changed",
+
+  "nv_step6_content": "What to carry on Election Day:\n- Any valid photo ID (Voter ID, Aadhaar, Passport, etc.)\n- Voter Information Slip (if you received one)\n- Dress comfortably — it can take time\n\nWhat NOT to do:\n- Do not carry mobile phones inside the polling booth\n- Do not take photos inside the booth\n- Do not accept money or gifts from candidates (it is illegal)\n- Do not bring campaign material to the booth\n\nYour rights at the booth:\n• You can ask the Presiding Officer to explain the process\n• You can challenge any person impersonating you\n• You have a right to a secret ballot — no one can ask whom you voted for",
+  "nv_step6_hl": "Voting hours are typically 7 AM to 6 PM. Go early to avoid queues!"
+}
