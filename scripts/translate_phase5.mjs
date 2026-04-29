@@ -23,16 +23,26 @@ async function main() {
       const batchKeys = keys.slice(i, i + BATCH_SIZE);
       const batchTexts = batchKeys.map(k => newStrings[k]);
       
-      try {
-        const res = await translate(batchTexts, { to: lang });
-        const resArray = Array.isArray(res) ? res : [res];
-        
-        for (let j = 0; j < batchKeys.length; j++) {
-          translated[batchKeys[j]] = resArray[j].text;
+      let success = false;
+      let retries = 3;
+      while (!success && retries > 0) {
+        try {
+          const res = await translate(batchTexts, { to: lang });
+          const resArray = Array.isArray(res) ? res : [res];
+          
+          for (let j = 0; j < batchKeys.length; j++) {
+            translated[batchKeys[j]] = resArray[j].text;
+          }
+          success = true;
+        } catch (e) {
+          retries--;
+          console.error(`Failed batch at ${i} for ${lang}, retries left: ${retries}`);
+          if (retries === 0) {
+            for (const k of batchKeys) translated[k] = newStrings[k]; // fallback only if all retries fail
+          } else {
+            await new Promise(r => setTimeout(r, 2000)); // wait 2s before retry
+          }
         }
-      } catch (e) {
-        console.error(`Failed batch at ${i} for ${lang}`, e);
-        for (const k of batchKeys) translated[k] = newStrings[k];
       }
       
       await new Promise(r => setTimeout(r, 200));

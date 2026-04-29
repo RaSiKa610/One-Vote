@@ -10,7 +10,7 @@ export const POLITICAL_ERAS = [
       {
         nameKey: 'era1_party1',
         descKey: 'era1_party1_desc',
-        symbol: 'https://upload.wikimedia.org/wikipedia/commons/4/45/Indian_National_Congress_hand_logo.svg'
+        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Indian_National_Congress_hand_logo.svg/200px-Indian_National_Congress_hand_logo.svg.png'
       }
     ],
     leaders: [
@@ -19,21 +19,21 @@ export const POLITICAL_ERAS = [
         nameKey: 'era1_leader1_name',
         roleKey: 'era1_leader1_role',
         initKey: 'era1_leader1_init',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/5/5f/Jawaharlal_Nehru_1946.jpg'
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/97/Nehru_in_the_Netherlands%2C_1957.jpg/250px-Nehru_in_the_Netherlands%2C_1957.jpg'
       },
       {
         id: 'patel',
         nameKey: 'era1_leader2_name',
         roleKey: 'era1_leader2_role',
         initKey: 'era1_leader2_init',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/1/1a/Sardar_patel_%28cropped%29.jpg'
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Sardar_patel_%28cropped%29.jpg/250px-Sardar_patel_%28cropped%29.jpg'
       },
       {
         id: 'shastri',
         nameKey: 'era1_leader3_name',
         roleKey: 'era1_leader3_role',
         initKey: 'era1_leader3_init',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Lal_Bahadur_Shastri_in_1964.jpg'
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Lal_Bahadur_Shastri_%28from_stamp%29.jpg/250px-Lal_Bahadur_Shastri_%28from_stamp%29.jpg'
       }
     ]
   },
@@ -48,7 +48,7 @@ export const POLITICAL_ERAS = [
       {
         nameKey: 'era2_party1',
         descKey: 'era2_party1_desc',
-        symbol: 'https://upload.wikimedia.org/wikipedia/commons/a/ae/Janata_Party_flag.svg'
+        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Janata_Party_flag.svg/200px-Janata_Party_flag.svg.png'
       }
     ],
     movements: [
@@ -63,14 +63,14 @@ export const POLITICAL_ERAS = [
         nameKey: 'era2_leader1_name',
         roleKey: 'era2_leader1_role',
         initKey: 'era2_leader1_init',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/e/e2/Indira_Gandhi_1977.jpg'
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/IndiraGandhi.png/250px-IndiraGandhi.png'
       },
       {
         id: 'rajiv',
         nameKey: 'era2_leader2_name',
         roleKey: 'era2_leader2_role',
         initKey: 'era2_leader2_init',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/e/ea/Rajiv_Gandhi_in_Moscow_1985.jpg'
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Rajiv_Gandhi_%281987%29.jpg/250px-Rajiv_Gandhi_%281987%29.jpg'
       }
     ]
   },
@@ -85,7 +85,7 @@ export const POLITICAL_ERAS = [
       {
         nameKey: 'era3_party1',
         descKey: 'era3_party1_desc',
-        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/India_flag_map.svg/1024px-India_flag_map.svg.png'
+        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/India_flag_map.svg/200px-India_flag_map.svg.png'
       }
     ],
     leaders: [
@@ -94,28 +94,28 @@ export const POLITICAL_ERAS = [
         nameKey: 'era3_leader1_name',
         roleKey: 'era3_leader1_role',
         initKey: 'era3_leader1_init',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/2/2f/P._V._Narasimha_Rao_in_1992.jpg'
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Visit_of_Narasimha_Rao%2C_Indian_Minister_for_Foreign_Affairs%2C_to_the_CEC_%28cropped%29.jpg/250px-Visit_of_Narasimha_Rao%2C_Indian_Minister_for_Foreign_Affairs%2C_to_the_CEC_%28cropped%29.jpg'
       },
       {
         id: 'vajpayee',
         nameKey: 'era3_leader2_name',
         roleKey: 'era3_leader2_role',
         initKey: 'era3_leader2_init',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/9/90/Atal_Bihari_Vajpayee_in_2001.jpg'
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Atal_Bihari_Vajpayee_%28crop_2%29.jpg/250px-Atal_Bihari_Vajpayee_%28crop_2%29.jpg'
       },
       {
         id: 'manmohan',
         nameKey: 'era3_leader3_name',
         roleKey: 'era3_leader3_role',
         initKey: 'era3_leader3_init',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/Dr._Manmohan_Singh_in_2012.jpg'
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Official_Portrait_of_the_Prime_Minister_Dr._Manmohan_Singh_%283x4_cropped%29.jpg/250px-Official_Portrait_of_the_Prime_Minister_Dr._Manmohan_Singh_%283x4_cropped%29.jpg'
       },
       {
         id: 'mayawati',
         nameKey: 'era3_leader4_name',
         roleKey: 'era3_leader4_role',
         initKey: 'era3_leader4_init',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/b/bc/Mayawati_%28cropped%29.jpg'
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Mayawati_%28cropped%29.jpg/250px-Mayawati_%28cropped%29.jpg'
       }
     ]
   },
@@ -130,7 +130,7 @@ export const POLITICAL_ERAS = [
       {
         nameKey: 'era4_party1',
         descKey: 'era4_party1_desc',
-        symbol: 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Bharatiya_Janata_Party_logo.svg'
+        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Bharatiya_Janata_Party_logo.svg/200px-Bharatiya_Janata_Party_logo.svg.png'
       }
     ],
     movements: [
@@ -145,14 +145,14 @@ export const POLITICAL_ERAS = [
         nameKey: 'era4_leader1_name',
         roleKey: 'era4_leader1_role',
         initKey: 'era4_leader1_init',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/8/80/Prime_Minister_Narendra_Modi_official_portrait.jpg'
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/The_official_portrait_of_Shri_Narendra_Modi%2C_the_Prime_Minister_of_the_Republic_of_India.jpg/250px-The_official_portrait_of_Shri_Narendra_Modi%2C_the_Prime_Minister_of_the_Republic_of_India.jpg'
       },
       {
         id: 'mamata',
         nameKey: 'era4_leader2_name',
         roleKey: 'era4_leader2_role',
         initKey: 'era4_leader2_init',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/2/23/Mamata_Banerjee_2021.jpg'
+        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Official_portrait_of_Mamata_Banerjee.jpg/250px-Official_portrait_of_Mamata_Banerjee.jpg'
       }
     ]
   }
