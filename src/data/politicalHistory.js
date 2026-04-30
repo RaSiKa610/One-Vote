@@ -10,7 +10,7 @@ export const POLITICAL_ERAS = [
       {
         nameKey: 'era1_party1',
         descKey: 'era1_party1_desc',
-        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Indian_National_Congress_hand_logo.svg/500px-Indian_National_Congress_hand_logo.svg.png'
+        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Indian_National_Congress_hand_logo.svg/1280px-Indian_National_Congress_hand_logo.svg.png'
       }
     ],
     leaders: [
@@ -115,7 +115,7 @@ export const POLITICAL_ERAS = [
         nameKey: 'era3_leader4_name',
         roleKey: 'era3_leader4_role',
         initKey: 'era3_leader4_init',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Mayawati_%28cropped%29.jpg/250px-Mayawati_%28cropped%29.jpg'
+        image: 'https://upload.wikimedia.org/wikipedia/commons/e/e6/Mayawati_in_2016.jpg'
       },
       {
         id: 'kanshiram',
