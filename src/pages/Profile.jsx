@@ -1,3 +1,7 @@
+import { useLanguage } from '../context/LanguageContext';
+import { useUser } from '../context/UserContext';
+import { languages } from '../i18n/translations';
+import { useNavigate } from 'react-router-dom';
 import { Globe, ExternalLink, Info, Leaf, CheckSquare, User, BarChart2, LogOut, Mail } from 'lucide-react';
 
 export default function Profile() {

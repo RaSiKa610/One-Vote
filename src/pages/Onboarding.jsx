@@ -1,3 +1,8 @@
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../context/LanguageContext';
+import { useUser } from '../context/UserContext';
+import { auth, db } from '../config/firebase';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { Globe, Leaf, Vote, ChevronRight, Mail, ArrowLeft } from 'lucide-react';
 
