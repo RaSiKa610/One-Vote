@@ -6,9 +6,9 @@ import { useOffline } from '../hooks/useOffline';
 const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
 const SAMPLE_BOOTHS = [
-  { id: 1, name: 'Government Primary School, Sector 12', address: 'Sector 12, Near Water Tank', dist: '0.3 km', booth: 'Booth #47' },
-  { id: 2, name: 'Community Hall, MG Road',              address: 'MG Road, Block B',          dist: '0.7 km', booth: 'Booth #48' },
-  { id: 3, name: 'Panchayat Bhavan, Ward 5',            address: 'Ward 5, Main Road',         dist: '1.1 km', booth: 'Booth #49' },
+  { id: 1, nameKey: 'booth_1_name', addrKey: 'booth_1_addr', dist: '0.3 km', boothNum: '47' },
+  { id: 2, nameKey: 'booth_2_name', addrKey: 'booth_2_addr', dist: '0.7 km', boothNum: '48' },
+  { id: 3, nameKey: 'booth_3_name', addrKey: 'booth_3_addr', dist: '1.1 km', boothNum: '49' },
 ];
 
 export default function Find() {
@@ -119,10 +119,10 @@ export default function Find() {
               <Building2 size={20} color="var(--red)" strokeWidth={1.75} />
             </div>
             <div style={{ flex: 1 }}>
-              <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--navy)', letterSpacing: '0.02em' }}>{booth.name}</p>
-              <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: 3 }}>{booth.address}</p>
+              <p style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.95rem', color: 'var(--navy)', letterSpacing: '0.02em' }}>{t(booth.nameKey)}</p>
+              <p style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginTop: 3 }}>{t(booth.addrKey)}</p>
               <div style={{ display: 'flex', gap: 10, marginTop: 8 }}>
-                <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--teal)', background: 'rgba(42,157,143,0.1)', padding: '3px 10px', borderRadius: 20 }}>{booth.booth}</span>
+                <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--teal)', background: 'rgba(42,157,143,0.1)', padding: '3px 10px', borderRadius: 20 }}>{t('booth_tag')} #{booth.boothNum}</span>
                 <span style={{ fontSize: '0.72rem', fontWeight: 700, color: 'var(--red)', background: 'rgba(192,57,43,0.08)', padding: '3px 10px', borderRadius: 20 }}>{booth.dist}</span>
               </div>
             </div>

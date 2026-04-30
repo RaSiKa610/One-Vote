@@ -10,7 +10,7 @@ export const POLITICAL_ERAS = [
       {
         nameKey: 'era1_party1',
         descKey: 'era1_party1_desc',
-        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Indian_National_Congress_hand_logo.svg/200px-Indian_National_Congress_hand_logo.svg.png'
+        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Indian_National_Congress_hand_logo.svg/500px-Indian_National_Congress_hand_logo.svg.png'
       }
     ],
     leaders: [
@@ -48,7 +48,7 @@ export const POLITICAL_ERAS = [
       {
         nameKey: 'era2_party1',
         descKey: 'era2_party1_desc',
-        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ae/Janata_Party_flag.svg/200px-Janata_Party_flag.svg.png'
+        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Janata_Dal_symbol.svg/500px-Janata_Dal_symbol.svg.png'
       }
     ],
     movements: [
@@ -85,7 +85,7 @@ export const POLITICAL_ERAS = [
       {
         nameKey: 'era3_party1',
         descKey: 'era3_party1_desc',
-        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/India_flag_map.svg/200px-India_flag_map.svg.png'
+        symbol: 'https://upload.wikimedia.org/wikipedia/commons/9/98/Indian_Election_Symbol_Elephant.png'
       }
     ],
     leaders: [
@@ -116,6 +116,13 @@ export const POLITICAL_ERAS = [
         roleKey: 'era3_leader4_role',
         initKey: 'era3_leader4_init',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Mayawati_%28cropped%29.jpg/250px-Mayawati_%28cropped%29.jpg'
+      },
+      {
+        id: 'kanshiram',
+        nameKey: 'era3_leader5_name',
+        roleKey: 'era3_leader5_role',
+        initKey: 'era3_leader5_init',
+        image: 'https://upload.wikimedia.org/wikipedia/commons/7/7a/Kanshiram.jpg'
       }
     ]
   },
@@ -130,7 +137,7 @@ export const POLITICAL_ERAS = [
       {
         nameKey: 'era4_party1',
         descKey: 'era4_party1_desc',
-        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Bharatiya_Janata_Party_logo.svg/200px-Bharatiya_Janata_Party_logo.svg.png'
+        symbol: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Logo_of_the_Bharatiya_Janata_Party.svg/500px-Logo_of_the_Bharatiya_Janata_Party.svg.png'
       }
     ],
     movements: [
