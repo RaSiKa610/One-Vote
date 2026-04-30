@@ -18,7 +18,7 @@ export default function Header({ title, showBack = false, showLang = true, trans
         ) : (
           <>
             <div className="header-logo-mark" aria-hidden="true" style={{ overflow: 'hidden' }}>
-              <img src="https://static.vecteezy.com/system/resources/previews/019/486/860/non_2x/vote-word-with-red-checkmark-symbol-for-election-design-illustration-free-vector.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src="https://static.vecteezy.com/system/resources/previews/036/514/118/non_2x/india-election-concept-democracy-voting-ballot-box-with-flag-icon-illustration-vector.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <span className="header-logo-text">{title || t('app_name')}</span>
           </>

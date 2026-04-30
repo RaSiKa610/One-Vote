@@ -10,7 +10,7 @@ function LogoMark({ size = 56 }) {
   return (
     <div style={{ width: size, height: size, borderRadius: size * 0.3, overflow: 'hidden', background: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', border: '1px solid var(--border)', boxShadow: 'var(--shadow-sm)' }}>
       <img 
-        src="https://static.vecteezy.com/system/resources/previews/019/486/860/non_2x/vote-word-with-red-checkmark-symbol-for-election-design-illustration-free-vector.jpg" 
+        src="https://static.vecteezy.com/system/resources/previews/036/514/118/non_2x/india-election-concept-democracy-voting-ballot-box-with-flag-icon-illustration-vector.jpg" 
         alt="One Vote" 
         style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
       />
