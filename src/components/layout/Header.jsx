@@ -17,8 +17,8 @@ export default function Header({ title, showBack = false, showLang = true, trans
           </button>
         ) : (
           <>
-            <div className="header-logo-mark" aria-hidden="true">
-              <span>1V</span>
+            <div className="header-logo-mark" aria-hidden="true" style={{ overflow: 'hidden' }}>
+              <img src="https://static.vecteezy.com/system/resources/previews/019/486/860/non_2x/vote-word-with-red-checkmark-symbol-for-election-design-illustration-free-vector.jpg" alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <span className="header-logo-text">{title || t('app_name')}</span>
           </>
