@@ -1,0 +1,6 @@
+.git
+.gitignore
+node_modules
+dist
+# Do NOT ignore .env for Cloud Run deployment from source
+#! .env

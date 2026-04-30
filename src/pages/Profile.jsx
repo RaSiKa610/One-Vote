@@ -1,8 +1,4 @@
-import { useLanguage } from '../context/LanguageContext';
-import { useUser } from '../context/UserContext';
-import { languages } from '../i18n/translations';
-import { useNavigate } from 'react-router-dom';
-import { Globe, ExternalLink, Info, Leaf, CheckSquare, User, BarChart2, LogOut, Phone } from 'lucide-react';
+import { Globe, ExternalLink, Info, Leaf, CheckSquare, User, BarChart2, LogOut, Mail } from 'lucide-react';
 
 export default function Profile() {
   const { t, langCode, setLanguage } = useLanguage();
@@ -44,11 +40,11 @@ export default function Profile() {
         <div style={{ marginTop: 20 }}>
           {user ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: 'rgba(255,255,255,0.1)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.2)' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <Phone size={14} color="rgba(255,255,255,0.7)" />
-                <span style={{ fontSize: '0.82rem', opacity: 0.9 }}>{user.phoneNumber || t('verified_user') || 'Verified User'}</span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8, overflow: 'hidden' }}>
+                <Mail size={14} color="rgba(255,255,255,0.7)" />
+                <span style={{ fontSize: '0.82rem', opacity: 0.9, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 180 }}>{user.email || t('verified_user')}</span>
               </div>
-              <button onClick={handleLogout} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.78rem', fontWeight: 700, color: '#ff9999', cursor: 'pointer', background: 'none', border: 'none' }}>
+              <button onClick={handleLogout} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.78rem', fontWeight: 700, color: '#ff9999', cursor: 'pointer', background: 'none', border: 'none', flexShrink: 0 }}>
                 <LogOut size={13} /> {t('sign_out') || 'Logout'}
               </button>
             </div>

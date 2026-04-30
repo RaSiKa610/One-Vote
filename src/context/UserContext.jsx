@@ -41,7 +41,13 @@ export function UserProvider({ children }) {
     const unsub = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-        // Try fetching cloud profile
+        // Default name from auth if not in Firestore
+        if (currentUser.displayName) {
+          setUserName(currentUser.displayName);
+          localStorage.setItem('one_vote_name', currentUser.displayName);
+        }
+
+        // Try fetching cloud profile for overrides
         try {
           const docSnap = await getDoc(doc(db, 'users', currentUser.uid));
           if (docSnap.exists()) {
