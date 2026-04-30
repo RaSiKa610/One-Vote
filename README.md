@@ -1,100 +1,77 @@
 # 🗳️ One Vote - Empowering Every Indian Voter
 
-**One Vote** is a comprehensive, multi-lingual digital platform designed to eliminate voter apathy and education gaps in the world's largest democracy. Built for the citizens of India, it provides a seamless journey from understanding democratic history to finding your polling booth.
-
-[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://one-vote-388302556359.us-central1.run.app)
-[![Tech Stack](https://img.shields.io/badge/Stack-React%20%7C%20Vite%20%7C%20Firebase-blue)](https://github.com/RaSiKa610/One-Vote)
+**One Vote** is a high-performance, multi-lingual civic engagement platform designed to eliminate voter apathy and education gaps in India. It provides a personalized, secure, and accessible journey for every citizen—from first-time voters to experienced electors.
 
 ---
 
-## 🌟 Key Features
+## 🏛️ Project Overview
 
-### 🌍 Hyper-Local Localization
-- Fully translated into **10 Indian Languages**: English, Hindi, Marathi, Gujarati, Bengali, Tamil, Telugu, Kannada, Malayalam, and Punjabi.
-- Dynamic language switching that updates the entire UI instantly.
+### **Vertical: Voter Education & Civic Engagement**
+In a democracy of 1.4 billion people, information fragmentation is the biggest barrier to participation. **One Vote** centralizes critical civic data (history, schemes, polling locations) into a single, localized interface.
 
-### 🏛️ Interactive Political History
-- Explore the evolution of Indian democracy from 1947 to today.
-- High-resolution visual history of political parties and key leaders like **Kanshi Ram**, **Sardar Patel**, and **B.R. Ambedkar**.
-
-### 🗺️ Smart Booth Finder
-- Integrated **Google Maps** to help voters locate their polling stations.
-- Sample data provided for testing, fully localized for each region.
-
-### 📜 Government Schemes Portal
-- A curated directory of central government schemes (PM-KISAN, Ayushman Bharat, etc.).
-- Detailed eligibility criteria and benefits translated for grassroots understanding.
-
-### 🤖 AI Call Assistant
-- A futuristic AI-powered voice assistant to guide new voters through the registration process and answer FAQs about the election process.
+### **The Approach & Logic**
+- **Mobile-First Progressive App**: Designed for the 700M+ smartphone users in India, ensuring a smooth experience even on mid-range devices.
+- **Context-Aware Onboarding**: Logic filters content based on the user's "Voter Type" (New vs. Existing), reducing information overload.
+- **Centralized Localization (i18n)**: A custom lookup architecture allows for instant translation across 10 regional languages without page reloads.
 
 ---
 
-## 🛠️ Technical Architecture
+## 🛠️ How the Solution Works
 
-- **Frontend**: React 18 with Vite for blazing fast development and builds.
-- **Styling**: Modern, premium CSS with a "Democratic Gold & Navy" aesthetic.
-- **Backend**: Firebase Authentication (Google Login) and Firestore (Cloud Sync).
-- **Hosting**: Google Cloud Run for scalable, serverless deployment.
-- **CI/CD**: Dockerized builds via Cloud Build.
-
----
-
-## 🚀 Getting Started
-
-### Prerequisites
-- Node.js 20+
-- Google Cloud SDK (`gcloud`)
-- Firebase Account
-
-### Installation
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/RaSiKa610/One-Vote.git
-   cd One-Vote
-   ```
-2. Install dependencies:
-   ```bash
-   npm install --legacy-peer-deps
-   ```
-3. Create a `.env` file with your Firebase and Google Maps keys:
-   ```env
-   VITE_GOOGLE_MAPS_API_KEY=your_key
-   VITE_FIREBASE_API_KEY=your_key
-   ...
-   ```
-4. Run locally:
-   ```bash
-   npm run dev
-   ```
+1.  **Identity & Persistence**: Users sign in via **Google Authentication**. Their progress (Voter Checklist, Quiz Scores) is synced in real-time to **Firebase Firestore**, ensuring continuity across devices.
+2.  **Educational Core**: 
+    - **History**: A visual timeline of Indian democracy (1947–2025) using high-resolution assets.
+    - **Schemes**: Dynamic directory of government benefits mapped to eligibility.
+3.  **Geospatial Intelligence**: The **Google Maps API** powers the Polling Station finder, providing visual confirmation of booth locations.
+4.  **AI Assistance**: A voice-enabled **AI Assistant** provides a natural language interface for users who prefer speaking over typing.
 
 ---
 
-## ☁️ Deployment
+## ☁️ Google Services Integration
 
-The project is optimized for **Google Cloud Run**.
-
-1. **Build and Deploy**:
-   ```powershell
-   gcloud run deploy one-vote --source . --region us-central1 --allow-unauthenticated
-   ```
-
----
-
-## 🔒 Security
-- **Secure Authentication**: Uses Firebase Google Auth for verified identity.
-- **Authorized Domains**: Strict domain whitelisting to prevent unauthorized API usage.
-- **Environment Variables**: Managed via Vite and Cloud Run secrets.
+The platform is a showcase of the **Google Cloud Ecosystem**:
+- **Hosting**: Deployed on **Google Cloud Run** for global scalability and sub-second cold starts.
+- **CI/CD**: Built using **Cloud Build** and stored in **Artifact Registry**.
+- **Auth**: **Firebase Authentication** provides a secure, passwordless entry point.
+- **Database**: **Cloud Firestore** handles multi-user synchronization with millisecond latency.
+- **Maps**: **Google Maps Javascript API** with custom styling for booth locating.
 
 ---
 
-## 🤝 Contributing
-Contributions are welcome! Please feel free to submit a Pull Request.
+## 🛡️ Evaluation Parameters
+
+### **Code Quality**
+- **Structure**: Clean separation of concerns (Components vs. Context vs. Data).
+- **Maintainability**: Centralized data files (`politicalHistory.js`, `schemes.js`) allow for content updates without touching code logic.
+
+### **Security**
+- **Safe Auth**: Transitioned to **Google Sign-In** to eliminate SMS spoofing risks.
+- **Secret Management**: API keys are isolated in `.env` and injected into the build pipeline via **Cloud Build**.
+- **Secure Deployment**: Implemented `.gcloudignore` and locked down Firestore rules to `request.auth.uid`.
+
+### **Efficiency**
+- **Optimized Assets**: Uses Wikimedia thumbnail optimization (e.g., `500px` widths) to reduce payload size.
+- **Vite Build**: Tree-shaking and minification ensure the final JS bundle is highly optimized for slow 3G/4G connections.
+
+### **Accessibility**
+- **Semantic HTML**: Proper use of `<header>`, `<main>`, and `<button>` for screen reader compatibility.
+- **Contrast**: High-contrast "Democratic Navy" on "Cream" background for readability in sunlight (outdoor voting conditions).
+- **Aria Labels**: Comprehensive ARIA support for icon buttons.
 
 ---
 
-## 📄 License
-This project is for educational and democratic empowerment purposes. 
+## 📝 Assumptions Made
+1.  **Connectivity**: Assumes the user has intermittent internet access (PWA capabilities allow for offline reading of cached history/schemes).
+2.  **Language**: Assumes that while users speak regional languages, they can recognize the standard Google Sign-In interface.
+3.  **Booth Data**: Polling booth data in the "Find" section is currently illustrative; in production, this would hook into the ECI's real-time API.
 
 ---
-*Created with ❤️ for a better India.*
+
+## 🚀 Deployment Command
+
+```powershell
+gcloud run deploy one-vote --source . --region us-central1 --allow-unauthenticated
+```
+
+---
+*Developed for the Google Cloud Virtual Competition - Focus on Democratic Resilience.*
