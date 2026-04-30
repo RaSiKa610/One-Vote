@@ -53,8 +53,22 @@ function AppShell({ children }) {
 }
 
 function RequireOnboarding({ children }) {
-  const { voterType } = useUser();
-  if (!voterType) return <Navigate to="/" replace />;
+  const { user, authLoading, voterType } = useUser();
+  const location = useLocation();
+
+  if (authLoading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg-app)' }}>
+        <div className="splash-dot" style={{ width: 12, height: 12 }}></div>
+      </div>
+    );
+  }
+
+  // If not logged in or no voter type selected, redirect to onboarding
+  if (!user || !voterType) {
+    return <Navigate to="/" state={{ from: location }} replace />;
+  }
+
   return <>{children}</>;
 }
 

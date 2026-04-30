@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useCallback, useEffect } from 'react';
-import { auth, db, googleProvider } from '../config/firebase';
-import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth';
+import { auth, db } from '../config/firebase';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 
 const UserContext = createContext(null);
@@ -20,9 +20,8 @@ export function UserProvider({ children }) {
   const [voterType, setVoterType] = useState(() => localStorage.getItem('one_vote_type') || null);
   const [userName, setUserName] = useState(() => localStorage.getItem('one_vote_name') || 'Voter');
   const [checklist, setChecklist] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem('one_vote_checklist')) || DEFAULT_CHECKLIST;
-    } catch { return DEFAULT_CHECKLIST; }
+    try { return JSON.parse(localStorage.getItem('one_vote_checklist')) || DEFAULT_CHECKLIST; }
+    catch { return DEFAULT_CHECKLIST; }
   });
   const [quizScores, setQuizScores] = useState(() => {
     try { return JSON.parse(localStorage.getItem('one_vote_scores')) || {}; }
@@ -34,18 +33,15 @@ export function UserProvider({ children }) {
     if (!auth.currentUser) return;
     try {
       await setDoc(doc(db, 'users', auth.currentUser.uid), data, { merge: true });
-    } catch (error) {
-      console.error('Error syncing to cloud:', error);
-    }
+    } catch (e) { console.error('Cloud sync error:', e); }
   };
 
   // Auth Listener
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    const unsub = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
       if (currentUser) {
-        setUserName(currentUser.displayName || 'Voter');
-        // Fetch cloud data
+        // Try fetching cloud profile
         try {
           const docSnap = await getDoc(doc(db, 'users', currentUser.uid));
           if (docSnap.exists()) {
@@ -53,31 +49,25 @@ export function UserProvider({ children }) {
             if (data.voterType) { setVoterType(data.voterType); localStorage.setItem('one_vote_type', data.voterType); }
             if (data.checklist) { setChecklist(data.checklist); localStorage.setItem('one_vote_checklist', JSON.stringify(data.checklist)); }
             if (data.quizScores) { setQuizScores(data.quizScores); localStorage.setItem('one_vote_scores', JSON.stringify(data.quizScores)); }
+            if (data.userName) { setUserName(data.userName); localStorage.setItem('one_vote_name', data.userName); }
           }
-        } catch (error) {
-          console.error('Error fetching cloud data:', error);
-        }
+        } catch (e) { console.error('Fetch cloud data error:', e); }
       }
       setAuthLoading(false);
     });
-    return () => unsubscribe();
+    return () => unsub();
   }, []);
-
-  const loginWithGoogle = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider);
-    } catch (error) {
-      console.error('Error signing in:', error);
-    }
-  };
 
   const logout = async () => {
     try {
       await signOut(auth);
+      setUser(null);
       setUserName('Voter');
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
+      localStorage.removeItem('one_vote_type');
+      localStorage.removeItem('one_vote_name');
+      localStorage.removeItem('one_vote_checklist');
+      localStorage.removeItem('one_vote_scores');
+    } catch (e) { console.error('Logout error:', e); }
   };
 
   const selectVoterType = useCallback((type) => {
@@ -108,12 +98,13 @@ export function UserProvider({ children }) {
 
   return (
     <UserContext.Provider value={{
-      user, authLoading, loginWithGoogle, logout,
+      user, authLoading, logout,
       voterType, selectVoterType,
       userName, setUserName,
       checklist, toggleChecklist,
       checklistProgress,
-      quizScores, saveQuizScore
+      quizScores, saveQuizScore,
+      syncToCloud,
     }}>
       {children}
     </UserContext.Provider>

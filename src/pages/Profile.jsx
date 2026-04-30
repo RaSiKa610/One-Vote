@@ -1,13 +1,20 @@
 import { useLanguage } from '../context/LanguageContext';
 import { useUser } from '../context/UserContext';
 import { languages } from '../i18n/translations';
-import { Globe, ExternalLink, Info, Leaf, CheckSquare, User, BarChart2 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Globe, ExternalLink, Info, Leaf, CheckSquare, User, BarChart2, LogOut, Phone } from 'lucide-react';
 
 export default function Profile() {
   const { t, langCode, setLanguage } = useLanguage();
-  const { user, loginWithGoogle, logout, voterType, selectVoterType, checklistProgress, quizScores, userName } = useUser();
+  const { user, logout, voterType, selectVoterType, checklistProgress, quizScores, userName } = useUser();
+  const navigate = useNavigate();
 
   const quizPct = quizScores['civic'] || 0;
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/', { replace: true });
+  };
 
   return (
     <div className="page-enter">
@@ -33,19 +40,21 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* Cloud Sync Auth */}
+        {/* Auth info */}
         <div style={{ marginTop: 20 }}>
-          {!user ? (
-            <button
-              onClick={loginWithGoogle}
-              style={{ width: '100%', padding: '12px', borderRadius: 12, background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.2)', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, fontSize: '0.85rem', fontWeight: 600, cursor: 'pointer', transition: 'var(--transition)' }}
-            >
-              <Globe size={16} /> {t('sign_in_backup')}
-            </button>
-          ) : (
+          {user ? (
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 16px', background: 'rgba(255,255,255,0.1)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.2)' }}>
-              <div style={{ fontSize: '0.8rem', opacity: 0.8 }}>{t('syncing_as')} <strong style={{ opacity: 1 }}>{user.email}</strong></div>
-              <button onClick={logout} style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--red-light)', cursor: 'pointer' }}>{t('sign_out')}</button>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <Phone size={14} color="rgba(255,255,255,0.7)" />
+                <span style={{ fontSize: '0.82rem', opacity: 0.9 }}>{user.phoneNumber || t('verified_user') || 'Verified User'}</span>
+              </div>
+              <button onClick={handleLogout} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.78rem', fontWeight: 700, color: '#ff9999', cursor: 'pointer', background: 'none', border: 'none' }}>
+                <LogOut size={13} /> {t('sign_out') || 'Logout'}
+              </button>
+            </div>
+          ) : (
+            <div style={{ padding: '12px 16px', background: 'rgba(255,255,255,0.08)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.15)', fontSize: '0.82rem', opacity: 0.7 }}>
+              {t('not_logged_in') || 'Not logged in. Restart app to sign in.'}
             </div>
           )}
         </div>
