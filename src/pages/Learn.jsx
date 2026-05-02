@@ -1,52 +1,51 @@
 import { useNavigate } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
-import { useUser } from '../context/UserContext';
-import { ChevronRight, Leaf, Landmark, CheckSquare, Scale, Brain, Monitor, Printer, Ban, FileText, Map } from 'lucide-react';
+import { 
+  ChevronRight, Leaf, Landmark, CheckSquare, 
+  Brain, Monitor, Printer, Ban, FileText, 
+  Map, BarChart2, Award, Phone, Users, Video
+} from 'lucide-react';
 
 const LEARN_SECTIONS = [
   {
-    id: 'new-voter',
-    Icon: Leaf,
-    bg: 'linear-gradient(135deg, #2A9D8F, #1a7a6e)',
-    titleKey: 'new_voter_guide',
-    subtitleKey: 'nv_sub',
-    badgeKey: 'start_here',
-    badgeColor: 'var(--teal)',
-    to: '/learn/new-voter',
-    forNew: true,
-  },
-  {
-    id: 'election-process',
-    Icon: Landmark,
-    bg: 'linear-gradient(135deg, #1A304D, #243d5e)',
-    titleKey: 'election_process',
-    subtitleKey: 'ep_sub',
-    badgeKey: 'must_read',
-    badgeColor: 'var(--navy)',
-    to: '/learn/election-process',
-    forNew: false,
-  },
-  {
-    id: 'checklist',
+    id: 'how-to-vote',
     Icon: CheckSquare,
-    bg: 'linear-gradient(135deg, #27ae60, #1e8449)',
-    titleKey: 'checklist_title',
-    subtitleKey: 'complete_before',
-    badgeKey: 'interactive',
-    badgeColor: '#27ae60',
-    to: '/learn/checklist',
-    forNew: false,
+    bg: 'linear-gradient(135deg, #2A9D8F, #1a7a6e)',
+    titleKey: 'htv_title',
+    subtitleKey: 'htv_sub',
+    badgeKey: 'essential',
+    badgeColor: 'var(--teal)',
+    to: '/learn/how-to-vote',
   },
   {
-    id: 'rights',
-    Icon: Scale,
-    bg: 'linear-gradient(135deg, #7c3aed, #5b21b6)',
-    titleKey: 'voter_rights',
-    subtitleKey: 'know_rights',
+    id: 'voter-types',
+    Icon: Users,
+    bg: 'linear-gradient(135deg, #1A304D, #243d5e)',
+    titleKey: 'vt_hub_title',
+    subtitleKey: 'vt_hub_sub',
     badgeKey: 'important',
+    badgeColor: 'var(--navy)',
+    to: '/learn/voter-types',
+  },
+  {
+    id: 'analytics',
+    Icon: BarChart2,
+    bg: 'linear-gradient(135deg, #E76F51, #c45b3d)',
+    titleKey: 'analytics_title',
+    subtitleKey: 'analytics_sub',
+    badgeKey: 'new_badge',
+    badgeColor: '#E76F51',
+    to: '/learn/analytics',
+  },
+  {
+    id: 'history',
+    Icon: Landmark,
+    bg: 'linear-gradient(135deg, #7c3aed, #5b21b6)',
+    titleKey: 'nav_history',
+    subtitleKey: 'hist_subtitle',
+    badgeKey: 'featured',
     badgeColor: '#7c3aed',
-    to: '/learn/checklist',
-    forNew: false,
+    to: '/history',
   },
   {
     id: 'quiz',
@@ -57,8 +56,14 @@ const LEARN_SECTIONS = [
     badgeKey: 'fun',
     badgeColor: 'var(--red)',
     to: '/learn/quiz',
-    forNew: false,
   },
+];
+
+const SECONDARY_SECTIONS = [
+  { id: 'nvd',       Icon: Award,     titleKey: 'nvd_title',       to: '/learn/nvd' },
+  { id: 'helpline',  Icon: Phone,     titleKey: 'helpline_title',  to: '/learn/helpline' },
+  { id: 'elc',       Icon: Landmark,  titleKey: 'elc_title',       to: '/learn/elc' },
+  { id: 'resources', Icon: Video,     titleKey: 'resources_title', to: '/learn/resources' },
 ];
 
 const EDUCATION_CARDS = [
@@ -66,18 +71,11 @@ const EDUCATION_CARDS = [
   { id: 'vvpat',        Icon: Printer,      titleKey: 'edu_vvpat_title',             descKey: 'edu_vvpat_desc' },
   { id: 'nota',         Icon: Ban,          titleKey: 'edu_nota_title',              descKey: 'edu_nota_desc' },
   { id: 'mcc',          Icon: FileText,     titleKey: 'edu_mcc_title',    descKey: 'edu_mcc_desc' },
-  { id: 'eci',          Icon: Landmark,     titleKey: 'edu_eci_title',              descKey: 'edu_eci_desc' },
-  { id: 'constituency', Icon: Map,          titleKey: 'edu_const_title',      descKey: 'edu_const_desc' },
 ];
 
 export default function Learn() {
   const { t } = useLanguage();
-  const { voterType } = useUser();
   const navigate = useNavigate();
-
-  const sections = voterType === 'new'
-    ? LEARN_SECTIONS
-    : LEARN_SECTIONS.filter(s => s.id !== 'new-voter').concat(LEARN_SECTIONS.filter(s => s.id === 'new-voter'));
 
   return (
     <div className="page-enter">
@@ -93,7 +91,7 @@ export default function Learn() {
       <div style={{ padding: '20px 20px 8px' }}>
         <p className="label" style={{ color: 'var(--text-muted)', marginBottom: 12 }}>{t('learning_paths')}</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          {sections.map(({ id, Icon, bg, titleKey, subtitleKey, badgeKey, badgeColor, to }) => (
+          {LEARN_SECTIONS.map(({ id, Icon, bg, titleKey, subtitleKey, badgeKey, badgeColor, to }) => (
             <button
               key={id}
               onClick={() => navigate(to)}
@@ -107,11 +105,27 @@ export default function Learn() {
               <div style={{ flex: 1 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
                   <span style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1rem', color: 'var(--navy)', letterSpacing: '0.02em' }}>{t(titleKey)}</span>
-                  <span style={{ fontSize: '0.58rem', fontWeight: 800, letterSpacing: '0.08em', background: badgeColor, color: 'white', padding: '2px 8px', borderRadius: 10 }}>{t(badgeKey)}</span>
+                  <span style={{ fontSize: '0.55rem', fontWeight: 800, letterSpacing: '0.08em', background: badgeColor, color: 'white', padding: '2px 8px', borderRadius: 10 }}>{ (badgeKey === 'new_badge' ? 'NEW' : t(badgeKey)).toUpperCase()}</span>
                 </div>
                 <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{t(subtitleKey)}</span>
               </div>
               <ChevronRight size={20} color="var(--text-muted)" style={{ flexShrink: 0 }} />
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Secondary Grid */}
+      <div style={{ padding: '16px 20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+          {SECONDARY_SECTIONS.map(({ id, Icon, titleKey, to }) => (
+            <button
+              key={id}
+              onClick={() => navigate(to)}
+              style={{ background: 'var(--cream)', border: '1px solid var(--border)', borderRadius: 16, padding: '16px', display: 'flex', alignItems: 'center', gap: 12, cursor: 'pointer', transition: 'var(--transition)' }}
+            >
+              <Icon size={18} color="var(--navy)" />
+              <span style={{ fontSize: '0.85rem', fontWeight: 700, color: 'var(--navy)' }}>{t(titleKey)}</span>
             </button>
           ))}
         </div>
@@ -126,8 +140,6 @@ export default function Learn() {
           {EDUCATION_CARDS.map(({ id, Icon, titleKey, descKey }) => (
             <div key={id}
               style={{ flexShrink: 0, width: 160, background: 'white', borderRadius: 16, padding: '16px', border: '2px solid var(--border)', cursor: 'pointer', transition: 'var(--transition)' }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = 'var(--navy)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = ''; }}
             >
               <div style={{ width: 40, height: 40, borderRadius: 10, background: 'var(--cream)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: 10 }}>
                 <Icon size={20} color="var(--navy)" strokeWidth={1.75} />

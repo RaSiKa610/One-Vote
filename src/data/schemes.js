@@ -28,7 +28,7 @@ export const GOVT_SCHEMES = [
     nameKey: 'sch_name_ssy',
     eligKey: 'sch_elig_ssy',
     infoKey: 'sch_info_ssy',
-    url: 'https://www.indiapost.gov.in/',
+    url: 'https://www.indiapost.gov.in/banking-services/savings',
     iconColor: '#8e44ad'
   },
   {

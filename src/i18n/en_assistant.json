@@ -1,5 +1,5 @@
 {
-  "ast_greeting": "Namaste! I am your One Vote Assistant. How can I help you today? You can say 'Register to vote', 'Find my booth', or 'Election process'.",
+  "ast_greeting": "Namaste! I am your One Vote Assistant. How can I help you today?",
   "ast_btn_register": "Register to Vote",
   "ast_btn_booth": "Find Polling Booth",
   "ast_btn_process": "Election Process",

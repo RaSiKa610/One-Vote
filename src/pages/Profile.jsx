@@ -2,7 +2,10 @@ import { useLanguage } from '../context/LanguageContext';
 import { useUser } from '../context/UserContext';
 import { languages } from '../i18n/translations';
 import { useNavigate } from 'react-router-dom';
-import { Globe, ExternalLink, Info, Leaf, CheckSquare, User, BarChart2, LogOut, Mail } from 'lucide-react';
+import { Globe, ExternalLink, Info, Leaf, CheckSquare, User, BarChart2, LogOut, Mail, LogIn } from 'lucide-react';
+import { auth, googleProvider, db } from '../config/firebase';
+import { signInWithPopup } from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export default function Profile() {
   const { t, langCode, setLanguage } = useLanguage();
@@ -11,9 +14,25 @@ export default function Profile() {
 
   const quizPct = quizScores['civic'] || 0;
 
-  const handleLogout = async () => {
-    await logout();
-    navigate('/', { replace: true });
+  const handleLogin = async () => {
+    try {
+      const result = await signInWithPopup(auth, googleProvider);
+      const u = result.user;
+      
+      // Save minimal profile to Firestore if new
+      const userRef = doc(db, 'users', u.uid);
+      const snap = await getDoc(userRef);
+      if (!snap.exists()) {
+        await setDoc(userRef, {
+          email: u.email,
+          displayName: u.displayName,
+          photoURL: u.photoURL,
+          createdAt: new Date().toISOString()
+        });
+      }
+    } catch (e) {
+      console.error('Login error:', e);
+    }
   };
 
   return (
@@ -29,13 +48,18 @@ export default function Profile() {
             )}
           </div>
           <div style={{ flex: 1 }}>
-            <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.6rem', letterSpacing: '0.02em', lineHeight: 1.2 }}>{userName}</h1>
+            <h1 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.6rem', letterSpacing: '0.02em', lineHeight: 1.2 }}>
+              {user ? (user.displayName || userName) : t('guest_user') || 'Guest User'}
+            </h1>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 4, opacity: 0.8, fontSize: '0.82rem' }}>
-              {voterType === 'new'
-                ? <Leaf size={14} color="rgba(255,255,255,0.9)" />
-                : <CheckSquare size={14} color="rgba(255,255,255,0.9)" />
-              }
-              <span>{voterType === 'new' ? t('new_voter') : t('existing_voter')}</span>
+              {voterType ? (
+                <>
+                  {voterType === 'new' ? <Leaf size={14} color="rgba(255,255,255,0.9)" /> : <CheckSquare size={14} color="rgba(255,255,255,0.9)" />}
+                  <span>{voterType === 'new' ? t('new_voter') : t('existing_voter')}</span>
+                </>
+              ) : (
+                <span>{t('voter_type_not_set') || 'Voter type not set'}</span>
+              )}
             </div>
           </div>
         </div>
@@ -53,9 +77,12 @@ export default function Profile() {
               </button>
             </div>
           ) : (
-            <div style={{ padding: '12px 16px', background: 'rgba(255,255,255,0.08)', borderRadius: 12, border: '1px solid rgba(255,255,255,0.15)', fontSize: '0.82rem', opacity: 0.7 }}>
-              {t('not_logged_in') || 'Not logged in. Restart app to sign in.'}
-            </div>
+            <button 
+              onClick={handleLogin}
+              style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, padding: '12px', background: 'white', border: 'none', borderRadius: 12, color: 'var(--navy)', fontWeight: 700, fontSize: '0.9rem', cursor: 'pointer', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}
+            >
+              <LogIn size={18} /> {t('sign_in_google') || 'Sign in with Google'}
+            </button>
           )}
         </div>
 

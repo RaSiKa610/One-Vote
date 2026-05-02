@@ -15,6 +15,7 @@ export default function Assistant({ onClose }) {
   const [textInput, setTextInput] = useState('');
   const [actionToExecute, setActionToExecute] = useState(null);
   const [prevNodeId, setPrevNodeId] = useState('root');
+  const [knowledgeResponseKey, setKnowledgeResponseKey] = useState(null);
   
   const isSpeakingRef = useRef(false);
   const isListeningRef = useRef(false);
@@ -42,6 +43,7 @@ export default function Assistant({ onClose }) {
     
     stopListening();
     setTranscript('');
+    setKnowledgeResponseKey(null);
     
     if (node.returnToPrevious) {
       speak(t(node.speakKey));
@@ -92,9 +94,20 @@ export default function Assistant({ onClose }) {
        }, 
        () => {
           if (tempTranscript) {
-              const nextNodeId = matchIntent(tempTranscript, nodeId);
-              if (nextNodeId) {
-                  runNode(nextNodeId);
+              const result = matchIntent(tempTranscript, nodeId);
+              
+              if (result && result.type === 'KNOWLEDGE') {
+                  // If it's a knowledge base match, speak the answer and stay on current node or return
+                  setKnowledgeResponseKey(result.key);
+                  speak(t(result.key));
+                  const checkEnd = setInterval(() => {
+                    if (!isSpeakingRef.current && !window.speechSynthesis.speaking) {
+                      clearInterval(checkEnd);
+                      startListeningForNode(nodeId); // Keep listening in same context
+                    }
+                  }, 500);
+              } else if (result) {
+                  runNode(result);
               } else {
                   runNode('not_understood');
               }
@@ -114,10 +127,20 @@ export default function Assistant({ onClose }) {
       stopSpeaking();
       stopListening();
       setTranscript(textInput);
-      const nextNodeId = matchIntent(textInput, currentNodeId);
+      const result = matchIntent(textInput, currentNodeId);
       setTextInput('');
-      if (nextNodeId) {
-          runNode(nextNodeId);
+      
+      if (result && result.type === 'KNOWLEDGE') {
+          setKnowledgeResponseKey(result.key);
+          speak(t(result.key));
+          const checkEnd = setInterval(() => {
+            if (!isSpeakingRef.current && !window.speechSynthesis.speaking) {
+              clearInterval(checkEnd);
+              startListeningForNode(currentNodeId);
+            }
+          }, 500);
+      } else if (result) {
+          runNode(result);
       } else {
           runNode('not_understood');
       }
@@ -175,7 +198,7 @@ export default function Assistant({ onClose }) {
          
          <div style={{ marginTop: 24, padding: '16px', background: 'rgba(255,255,255,0.05)', borderRadius: 16, width: '100%', maxWidth: 400, textAlign: 'center', minHeight: 80, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.95)', lineHeight: 1.5 }}>
-               {t(currentNode.speakKey)}
+               {knowledgeResponseKey ? t(knowledgeResponseKey) : t(currentNode.speakKey)}
             </p>
          </div>
 

@@ -22,7 +22,7 @@ export default function Find() {
     if (!navigator.geolocation) return;
     navigator.geolocation.getCurrentPosition(
       pos => setUserPos({ lat: pos.coords.latitude, lng: pos.coords.longitude }),
-      () => {}
+      () => { }
     );
   };
 
@@ -130,7 +130,7 @@ export default function Find() {
         ))}
 
         <a
-          href="https://voters.eci.gov.in/booth-locator"
+          href="https://electoralsearch.eci.gov.in/"
           target="_blank"
           rel="noopener noreferrer"
           style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8, padding: '14px', background: 'var(--navy)', color: 'white', borderRadius: 16, fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1rem', letterSpacing: '0.02em', marginTop: 8 }}

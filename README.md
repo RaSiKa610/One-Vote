@@ -7,23 +7,26 @@
 ## 🏛️ Project Overview
 
 ### **Vertical: Voter Education & Civic Engagement**
-In a democracy of 1.4 billion people, information fragmentation is the biggest barrier to participation. **One Vote** centralizes critical civic data (history, schemes, polling locations) into a single, localized interface.
+In a democracy of 1.4 billion people, information fragmentation and complex onboarding are barriers to participation. **One Vote** (v2.0) simplifies the user journey by removing mandatory authentication gates and providing a "Guest-First" experience, ensuring education is accessible to everyone instantly.
 
 ### **The Approach & Logic**
-- **Mobile-First Progressive App**: Designed for the 700M+ smartphone users in India, ensuring a smooth experience even on mid-range devices.
-- **Context-Aware Onboarding**: Logic filters content based on the user's "Voter Type" (New vs. Existing), reducing information overload.
-- **Centralized Localization (i18n)**: A custom lookup architecture allows for instant translation across 10 regional languages without page reloads.
+- **Authentication-Optional Architecture:** Users can browse the entire SVEEP educational hub, use the AI assistant, and view analytics as a guest. Google Sign-In is moved to the profile page for optional progress syncing.
+- **SVEEP Feature Parity:** Integrated comprehensive educational modules based on the ECI SVEEP program (Voter Types, How-to-Vote visual guides, ELCs, and Resources).
+- **Data-Driven Transparency:** A new Analytics Dashboard provides historical context and social proof by visualizing 15+ years of ECI data.
+- **Political Knowledge AI:** Upgraded the assistant from a simple router to a knowledge-base responder capable of answering political trivia and current government facts.
 
 ---
 
 ## 🛠️ How the Solution Works
 
-1.  **Identity & Persistence**: Users sign in via **Google Authentication**. Their progress (Voter Checklist, Quiz Scores) is synced in real-time to **Firebase Firestore**, ensuring continuity across devices.
-2.  **Educational Core**: 
-    - **History**: A visual timeline of Indian democracy (1947–2025) using high-resolution assets.
-    - **Schemes**: Dynamic directory of government benefits mapped to eligibility.
-3.  **Geospatial Intelligence**: The **Google Maps API** powers the Polling Station finder, providing visual confirmation of booth locations.
-4.  **AI Assistance**: A voice-enabled **AI Assistant** provides a natural language interface for users who prefer speaking over typing.
+1.  **Guest Access**: The app defaults to a "Guest Voter" state. Navigation guards are removed to allow immediate access to the **Learn** and **Find** hubs.
+2.  **Educational Hub (v2.0)**:
+    - **Voter Types**: Dedicated information for General, Service, Overseas, and PwD voters.
+    - **Visual How-to-Vote**: A 7-step journey through the polling booth process.
+    - **NVD Pledge**: An interactive tool to take and share the National Voter's Pledge.
+3.  **Analytics Dashboard**: Uses **Recharts** to render 6 dynamic visualizations of historical ECI data (2009-2024), including turnout trends, gender distribution, and electorate growth.
+4.  **Upgraded AI Assistant**: Uses an intent-matching logic coupled with a political knowledge base. It can answer questions like "Who is the PM?" or "What is the voting age?" in any of the 10 supported languages.
+5.  **Localization Sync**: A specialized translation pipeline ensures that 100% of the app's content, including analytics labels and AI answers, is available in 10 Indian languages.
 
 ---
 
@@ -31,39 +34,33 @@ In a democracy of 1.4 billion people, information fragmentation is the biggest b
 
 The platform is a showcase of the **Google Cloud Ecosystem**:
 - **Hosting**: Deployed on **Google Cloud Run** for global scalability and sub-second cold starts.
-- **CI/CD**: Built using **Cloud Build** and stored in **Artifact Registry**.
-- **Auth**: **Firebase Authentication** provides a secure, passwordless entry point.
-- **Database**: **Cloud Firestore** handles multi-user synchronization with millisecond latency.
-- **Maps**: **Google Maps Javascript API** with custom styling for booth locating.
+- **AI/ML**: Natural Language intent matching for the voice assistant.
+- **Auth**: **Firebase Authentication** (Google Provider) used for optional profile syncing.
+- **Database**: **Cloud Firestore** stores user checklists and quiz progress.
+- **Maps**: **Google Maps Javascript API** powers the Polling Station finder.
 
 ---
 
 ## 🛡️ Evaluation Parameters
 
 ### **Code Quality**
-- **Structure**: Clean separation of concerns (Components vs. Context vs. Data).
-- **Maintainability**: Centralized data files (`politicalHistory.js`, `schemes.js`) allow for content updates without touching code logic.
+- **Clean Architecture**: Functional components with strict separation of business logic (Context/Utils) and UI.
+- **Performance**: PWA service worker with custom runtime caching for Google Fonts and Maps assets.
 
 ### **Security**
-- **Safe Auth**: Transitioned to **Google Sign-In** to eliminate SMS spoofing risks.
-- **Secret Management**: API keys are isolated in `.env` and injected into the build pipeline via **Cloud Build**.
-- **Secure Deployment**: Implemented `.gcloudignore` and locked down Firestore rules to `request.auth.uid`.
+- **Responsible AI**: The assistant is grounded in a static knowledge base to prevent hallucinations regarding sensitive political data.
+- **Data Privacy**: No personal data is collected from guest users. Firebase rules ensure authenticated users can only access their own sync records.
 
 ### **Efficiency**
-- **Optimized Assets**: Uses Wikimedia thumbnail optimization (e.g., `500px` widths) to reduce payload size.
-- **Vite Build**: Tree-shaking and minification ensure the final JS bundle is highly optimized for slow 3G/4G connections.
-
-### **Accessibility**
-- **Semantic HTML**: Proper use of `<header>`, `<main>`, and `<button>` for screen reader compatibility.
-- **Contrast**: High-contrast "Democratic Navy" on "Cream" background for readability in sunlight (outdoor voting conditions).
-- **Aria Labels**: Comprehensive ARIA support for icon buttons.
+- **Optimized Rendering**: Recharts implementation uses lightweight SVG rendering for maximum performance on mobile browsers.
+- **Resource Management**: Minimal dependency footprint; uses vanilla CSS for styling to keep bundle size under 200KB.
 
 ---
 
 ## 📝 Assumptions Made
-1.  **Connectivity**: Assumes the user has intermittent internet access (PWA capabilities allow for offline reading of cached history/schemes).
-2.  **Language**: Assumes that while users speak regional languages, they can recognize the standard Google Sign-In interface.
-3.  **Booth Data**: Polling booth data in the "Find" section is currently illustrative; in production, this would hook into the ECI's real-time API.
+1.  **Data Currency**: Historical ECI data (2009-2024) is used for analytics as real-time booth data is not publicly available via API.
+2.  **Connectivity**: The app is designed as an "Offline-First" PWA. All educational content and previously viewed analytics are cached for offline use.
+3.  **Verification**: For the "How to Vote" guide, it is assumed the user will follow the official ECI procedure once at the booth.
 
 ---
 

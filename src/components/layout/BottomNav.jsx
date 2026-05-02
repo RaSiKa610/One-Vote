@@ -7,7 +7,7 @@ export default function BottomNav() {
   const navItems = [
     { to: '/home', icon: Home, label: t('home') },
     { to: '/learn', icon: BookOpen, label: t('learn') },
-    { to: '/history', icon: Landmark, label: t('nav_history') },
+    // { to: '/history', icon: Landmark, label: t('nav_history') },
     { to: '/schemes', icon: ShieldCheck, label: t('nav_schemes') },
     { to: '/find', icon: MapPin, label: t('find') },
     { to: '/profile', icon: User, label: t('profile') },

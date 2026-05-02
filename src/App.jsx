@@ -16,6 +16,14 @@ import Quiz from './pages/Quiz';
 import Profile from './pages/Profile';
 import PoliticalHistory from './pages/PoliticalHistory';
 import GovSchemes from './pages/GovSchemes';
+import VoterTypeHub from './pages/VoterTypeHub';
+import HowToVote from './pages/HowToVote';
+import Analytics from './pages/Analytics';
+import NVD from './pages/NVD';
+import Helpline from './pages/Helpline';
+import ELC from './pages/ELC';
+import Resources from './pages/Resources';
+import VoterTypeDetail from './pages/VoterTypeDetail';
 
 const PAGE_TITLES = {
   '/home': null,
@@ -53,8 +61,8 @@ function AppShell({ children }) {
 }
 
 function RequireOnboarding({ children }) {
-  const { user, authLoading, voterType } = useUser();
-  const location = useLocation();
+  const { authLoading } = useUser();
+  const hasOnboarded = localStorage.getItem('one_vote_onboarded') === 'true';
 
   if (authLoading) {
     return (
@@ -64,12 +72,8 @@ function RequireOnboarding({ children }) {
     );
   }
 
-  // If not logged in or no voter type selected, redirect to onboarding
-  if (!user || !voterType) {
-    return <Navigate to="/" state={{ from: location }} replace />;
-  }
-
-  return <>{children}</>;
+  if (!hasOnboarded) return <Navigate to="/onboarding" replace />;
+  return children;
 }
 
 export default function App() {
@@ -79,18 +83,30 @@ export default function App() {
         <BrowserRouter>
           <AppShell>
             <Routes>
-              <Route path="/" element={<Onboarding />} />
+              <Route path="/onboarding" element={<Onboarding />} />
               <Route path="/home" element={<RequireOnboarding><Home /></RequireOnboarding>} />
               <Route path="/learn" element={<RequireOnboarding><Learn /></RequireOnboarding>} />
               <Route path="/learn/new-voter" element={<RequireOnboarding><NewVoter /></RequireOnboarding>} />
               <Route path="/learn/election-process" element={<RequireOnboarding><ElectionProcess /></RequireOnboarding>} />
               <Route path="/learn/checklist" element={<RequireOnboarding><VoterChecklist /></RequireOnboarding>} />
               <Route path="/learn/quiz" element={<RequireOnboarding><Quiz /></RequireOnboarding>} />
+              
+              {/* New v2.0 Routes */}
+              <Route path="/learn/voter-types" element={<RequireOnboarding><VoterTypeHub /></RequireOnboarding>} />
+              <Route path="/learn/voter-types/:type" element={<RequireOnboarding><VoterTypeDetail /></RequireOnboarding>} />
+              <Route path="/learn/how-to-vote" element={<RequireOnboarding><HowToVote /></RequireOnboarding>} />
+              <Route path="/learn/analytics" element={<RequireOnboarding><Analytics /></RequireOnboarding>} />
+              <Route path="/learn/nvd" element={<RequireOnboarding><NVD /></RequireOnboarding>} />
+              <Route path="/learn/helpline" element={<RequireOnboarding><Helpline /></RequireOnboarding>} />
+              <Route path="/learn/elc" element={<RequireOnboarding><ELC /></RequireOnboarding>} />
+              <Route path="/learn/resources" element={<RequireOnboarding><Resources /></RequireOnboarding>} />
+
               <Route path="/find" element={<RequireOnboarding><Find /></RequireOnboarding>} />
               <Route path="/history" element={<RequireOnboarding><PoliticalHistory /></RequireOnboarding>} />
               <Route path="/schemes" element={<RequireOnboarding><GovSchemes /></RequireOnboarding>} />
               <Route path="/profile" element={<RequireOnboarding><Profile /></RequireOnboarding>} />
-              <Route path="*" element={<Navigate to="/" replace />} />
+              <Route path="/" element={<Navigate to="/home" replace />} />
+              <Route path="*" element={<Navigate to="/home" replace />} />
             </Routes>
           </AppShell>
         </BrowserRouter>
