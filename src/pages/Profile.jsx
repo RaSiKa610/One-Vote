@@ -72,7 +72,7 @@ export default function Profile() {
                 <Mail size={14} color="rgba(255,255,255,0.7)" />
                 <span style={{ fontSize: '0.82rem', opacity: 0.9, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: 180 }}>{user.email || t('verified_user')}</span>
               </div>
-              <button onClick={handleLogout} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.78rem', fontWeight: 700, color: '#ff9999', cursor: 'pointer', background: 'none', border: 'none', flexShrink: 0 }}>
+              <button onClick={logout} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: '0.78rem', fontWeight: 700, color: '#ff9999', cursor: 'pointer', background: 'none', border: 'none', flexShrink: 0 }}>
                 <LogOut size={13} /> {t('sign_out') || 'Logout'}
               </button>
             </div>
