@@ -1,15 +1,31 @@
 import fs from 'fs';
-import translate from 'google-translate-api-x';
+import { TranslationServiceClient } from '@google-cloud/translate';
 
 const TARGET_LANGS = ['hi', 'mr', 'gu', 'bn', 'ta', 'te', 'kn', 'ml', 'pa'];
 const en = JSON.parse(fs.readFileSync('src/i18n/en.json', 'utf8'));
 
+// Note: Official API requires GOOGLE_APPLICATION_CREDENTIALS or an API Key
+// For simplicity in a script, we'll assume the environment is authenticated
+const translationClient = new TranslationServiceClient();
+
 async function translateChunk(texts, lang) {
   try {
-    const res = await translate(texts, { to: lang });
-    return Array.isArray(res) ? res.map(r => r.text) : [res.text];
+    const projectId = process.env.VITE_FIREBASE_PROJECT_ID || 'one-vote-41412';
+    const location = 'global';
+
+    const request = {
+      parent: `projects/${projectId}/locations/${location}`,
+      contents: texts,
+      mimeType: 'text/plain',
+      sourceLanguageCode: 'en',
+      targetLanguageCode: lang,
+    };
+
+    const [response] = await translationClient.translateText(request);
+    return response.translations.map(t => t.translatedText);
   } catch (e) {
     console.error(`Error translating to ${lang}:`, e);
+    console.log("Ensure you have enabled the Cloud Translation API and set up credentials.");
     return texts; // Fallback to English on error
   }
 }

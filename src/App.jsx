@@ -24,6 +24,7 @@ import Helpline from './pages/Helpline';
 import ELC from './pages/ELC';
 import Resources from './pages/Resources';
 import VoterTypeDetail from './pages/VoterTypeDetail';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 const PAGE_TITLES = {
   '/home': null,
@@ -105,6 +106,7 @@ export default function App() {
               <Route path="/history" element={<RequireOnboarding><PoliticalHistory /></RequireOnboarding>} />
               <Route path="/schemes" element={<RequireOnboarding><GovSchemes /></RequireOnboarding>} />
               <Route path="/profile" element={<RequireOnboarding><Profile /></RequireOnboarding>} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
               <Route path="/" element={<Navigate to="/home" replace />} />
               <Route path="*" element={<Navigate to="/home" replace />} />
             </Routes>

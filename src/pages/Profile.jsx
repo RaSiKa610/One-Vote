@@ -153,7 +153,7 @@ export default function Profile() {
           </div>
         </div>
 
-        {/* About */}
+        {/* About & Legal */}
         <div style={{ background: 'var(--cream)', borderRadius: 20, border: '1px solid var(--border)', padding: '18px', marginBottom: 16 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
             <Info size={18} color="var(--navy)" />
@@ -162,7 +162,18 @@ export default function Profile() {
           <p style={{ fontSize: '0.83rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
             {t('profile_about_desc')}
           </p>
-          <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: 10 }}>{t('version')} 1.0.0 — Phase 3</p>
+          <div style={{ marginTop: 12, padding: '10px', background: 'rgba(0,0,0,0.03)', borderRadius: 10, border: '1px dashed var(--border)' }}>
+            <p style={{ fontSize: '0.72rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+              <strong>Disclaimer:</strong> This is a non-partisan educational project developed for the <strong>#BuildwithAI #PromptWarsVirtual</strong> competition (Google for Developers). 
+              It is NOT an official government application. All election-related information is sourced directly from the <strong>Election Commission of India (ECI)</strong>.
+            </p>
+          </div>
+          <div style={{ marginTop: 10, display: 'flex', gap: 12 }}>
+            <p style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{t('version')} 1.0.0 — Phase 3</p>
+            <button onClick={() => navigate('/privacy')} style={{ fontSize: '0.75rem', color: 'var(--teal)', fontWeight: 600, background: 'none', border: 'none', padding: 0, cursor: 'pointer', textDecoration: 'underline' }}>
+              Privacy Policy
+            </button>
+          </div>
         </div>
 
         {/* ECI links */}

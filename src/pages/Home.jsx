@@ -61,6 +61,14 @@ export default function Home() {
 
   return (
     <div className="page-enter">
+      {/* Educational Disclaimer Banner */}
+      <div style={{ background: '#FFF3CD', color: '#856404', padding: '10px 16px', fontSize: '0.72rem', lineHeight: 1.4, borderBottom: '1px solid #FFEEBA', display: 'flex', gap: 10, alignItems: 'center' }}>
+        <Info size={16} flexShrink={0} />
+        <p>
+          <strong>Notice:</strong> This is a non-official educational project for the #PromptWarsVirtual competition. All data is sourced from the Election Commission of India (ECI).
+        </p>
+      </div>
+
       {isOffline && (
         <div className="offline-banner" role="status">
           {t('offline_notice')}
